@@ -15,3 +15,5 @@ sudo yum install -y httpd libapache2-mod-php php8.3 php8.3-mysql php8.3-xml php8
 # Restart Apache service
 echo "Restarting Apache service..."
 sudo systemctl restart httpd
+sudo rm -rf /var/www/html/
+mkdir /var/www/html
