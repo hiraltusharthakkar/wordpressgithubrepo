@@ -8,7 +8,7 @@ sudo find /var/www/html -type f -exec chmod 644 {} \;
 
 # Create wp-config.php from wp-config-sample.php
 echo "Configuring wp-config.php..."
-cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+cp /var/www/html/wp-config.php /var/www/html/wp-config.php
 
 # Update wp-config.php with database credentials
 sed -i "s/database_name_here/wordpress/" /var/www/html/wp-config.php
