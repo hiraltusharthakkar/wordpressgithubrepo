@@ -1,8 +1,11 @@
 version: 0.0
-os: linux
-files:
-  - source: / 
-    destination: /var/www/html/
+- myECSService:
+      type: AWS::ECS::Service
+      properties:
+        clusterName: New-Cluster1
+        serviceName: New2
+        desiredCount: 1
+        taskDefinition: Task
 hooks:
   BeforeInstall:
     - location: before_install.sh
