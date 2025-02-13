@@ -1,8 +1,19 @@
 version: 0.0
-os: linux
-files:
-  - source: / 
-    destination: /var/www/html/
+- myECSService:
+      type: AWS::ECS::Service
+      properties:
+        clusterName: New-Cluster1
+        serviceName: New2
+        desiredCount: 1
+        taskDefinition: Task
+        loadBalancers:
+              - targetGroupArn :arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/fargate-target-group/3d0de6eab35a9fde
+                containerName: New
+                containerPort: 80
+              - targetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/New-fargate-service-2/59dc68ae96b5bbe7
+                containerName: New
+                containerPort: 80
+              
 hooks:
   BeforeInstall:
     - location: before_install.sh
