@@ -18,6 +18,7 @@ phases:
       - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
    post_build:
     commands:
+      - echo Generating imagedefinitions.json...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
    artifacts:
     files:
