@@ -20,7 +20,7 @@ phases:
     commands:
       - echo Generating imagedefinitions.json...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-  art ifacts:
+  artifacts:
     files:
       - imagedefinitions.json
       - '**/*'
