@@ -1,0 +1,26 @@
+version: 0.2
+phases
+   install:
+    runtime-versions:
+      docker: 20
+   pre_build:
+    commands:
+      - sudo apt-get update -y
+      - sudo apt-get install awscli -y
+      - aws --version
+      - echo Logging in to Amazon ECR....
+      - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 054037131762.dkr.ecr.eu-central-1.amazonaws.com
+      - REPOSITORY_URI=054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr
+      - IMAGE_TAG=$CODEBUILD_RESOLVED_SOURCE_VERSION
+   build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+   post_build:
+    commands:
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+   artifacts:
+    files:
+      - imagedefinitions.json
+      - '**/*'
+      
