@@ -1,10 +1,13 @@
 version: 0.2
 phases:
-  pre_build:
+  install:
     commands:
+      - sudo apt-get clean
       - sudo apt-get update -y
       - sudo apt-get install awscli -y
       - aws --version
+  pre_build:
+    commands:
       - echo Logging in to Amazon ECR....
       - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 054037131762.dkr.ecr.eu-central-1.amazonaws.com
       - REPOSITORY_URI=054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr
