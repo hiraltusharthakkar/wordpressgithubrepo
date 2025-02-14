@@ -1,5 +1,5 @@
 FROM wordpress:latest
-RUN apk add curl
+RUN apt-get update && apt-get install -y curl
 WORKDIR /var/www/html
 RUN rm -rf /var/www/html/wp-content
 COPY . /var/www/html/
