@@ -4,16 +4,16 @@ Resources:
       Type: AWS::ECS::Service
       Properties:
         TaskDefinition: "arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8"
-        portMappings:
-             - containerPort: 80
-               hostPort: 80
+        PortMappings:
+          - ContainerPort: 80
+            HostPort: 80
         LoadBalancerInfo:
-              - targetGroupArn :arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/New-TargetGrpforECS/412acc15fcbb1d96
-                containerName: New
-                containerPort: 80
-              - targetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/tg-New-Cl-codedeploy-service-2/7ffea5abc775edfd
-                containerName: New
-                containerPort: 80
+          - TargetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/New-TargetGrpforECS/412acc15fcbb1d96
+            ContainerName: New
+            ContainerPort: 80
+          - TargetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/tg-New-Cl-codedeploy-service-2/7ffea5abc775edfd
+            ContainerName: New
+            ContainerPort: 80
               
 hooks:
   BeforeInstall:
