@@ -1,27 +1,11 @@
 version: 0.0
-Resources:
-  - TargetService:
-      Type: AWS::ECS::Service
-      Properties:
-        TaskDefinition: "arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8"
-        PortMappings:
-          - ContainerPort: 80
-            HostPort: 80
-        LoadBalancerInfo:
-          - TargetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/New-TargetGrpforECS/412acc15fcbb1d96
-            ContainerName: New
-            ContainerPort: 80
-          - TargetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/tg-New-Cl-codedeploy-service-2/7ffea5abc775edfd
-            ContainerName: New
-            ContainerPort: 80
-              
-hooks:
-  BeforeInstall:
-    - location: before_install.sh
-      timeout: 300
-  AfterInstall:
-    - location: after_install.sh
-      timeout: 300
-  ApplicationStart:
-    - location: application_start.sh
-      timeout: 300
+resources:
+  - myECSService:
+      type: AWS::ECS::Service
+      properties:
+        clusterName: New-Cluster1
+        serviceName: blue-green
+        taskDefinition: arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8
+        loadBalancerInfo:
+          targetGroupInfo:
+            - name: Target-Grp-ECS
