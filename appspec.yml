@@ -1,11 +1,9 @@
 version: 0.0
-resources:
-  - myECSService:
-      type: AWS::ECS::Service
-      properties:
-        clusterName: New-Cluster1
-        serviceName: blue-green
-        taskDefinition: arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8"
         loadBalancerInfo:
-          targetGroupInfo:
-            - name: Target-Grp-ECS
+          ContainerName: "New"
+          ContainerPort: 80
