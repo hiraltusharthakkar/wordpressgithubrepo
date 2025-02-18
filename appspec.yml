@@ -1,26 +1,9 @@
 version: 0.0
-- myECSService:
-      type: AWS::ECS::Service
-      properties:
-        clusterName: New-Cluster1
-        serviceName: New2
-        desiredCount: 1
-        taskDefinition: Task
-        loadBalancers:
-              - targetGroupArn :arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/fargate-target-group/3d0de6eab35a9fde
-                containerName: New
-                containerPort: 80
-              - targetGroupArn: arn:aws:elasticloadbalancing:eu-central-1:054037131762:targetgroup/New-fargate-service-2/59dc68ae96b5bbe7
-                containerName: New
-                containerPort: 80
-              
-hooks:
-  BeforeInstall:
-    - location: before_install.sh
-      timeout: 300
-  AfterInstall:
-    - location: after_install.sh
-      timeout: 300
-  ApplicationStart:
-    - location: application_start.sh
-      timeout: 300
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8"
+        loadBalancerInfo:
+          ContainerName: "New"
+          ContainerPort: 80
