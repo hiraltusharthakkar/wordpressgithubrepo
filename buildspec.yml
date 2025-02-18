@@ -16,7 +16,8 @@ phases:
       - echo Generating imagedefinitions.json...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - printf '{"ImageURI":"054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr:latest"}' > imageDetail.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json 
+      
 artifacts:
     files:
     - imageDetail.json
