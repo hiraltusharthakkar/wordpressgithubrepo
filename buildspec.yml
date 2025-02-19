@@ -16,6 +16,11 @@ phases:
       - echo Generating imagedefinitions.json...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo "Updating task definition JSON with the new image..."
+      - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI"'@' deploy/$taskdef.json
+      # Register a new task definition
+      - echo "Registering new ECS task definition..."
+       TASK_DEF_ARN=$(aws ecs register-task-definition --family proptech-gpt-$ENV --cli-input-json file://deploy/$taskdef.json --region eu-central-1 --query 'taskDefinition.taskDefinitionArn' --output text)
       - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json 
       
 artifacts:
