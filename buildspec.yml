@@ -20,7 +20,7 @@ phases:
       - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI"'@' deploy/$taskdef.json
       # Register a new task definition
       - echo "Registering new ECS task definition..."
-      - TASK_DEF_ARN=$(aws ecs register-task-definition --family proptech-gpt-$ENV --cli-input-json file://deploy/$taskdef.json --region eu-central-1 --query 'taskDefinition.taskDefinitionArn' --output text)
+      - TASK_DEF_ARN=$(aws ecs register-task-definition --family proptech-gpt-$ENV --cli-input-json file:// taskdef.json --region eu-central-1 --query 'taskDefinition.taskDefinitionArn' --output text)
       - LATEST_TASK_DEF=$(aws ecs list-task-definitions --family-prefix TASK--sort DESC --query 'taskDefinitionArns[0]' --output text)
       - echo "Latest Task Definition = $LATEST_TASK_DEF"
       - sed -i 's@LATEST_TASK_DEF @'"$LATEST_TASK_DEF"'@' deploy/$appspec.yaml
