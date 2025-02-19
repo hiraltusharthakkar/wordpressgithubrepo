@@ -23,7 +23,7 @@ phases:
       - TASK_DEF_ARN=$(aws ecs register-task-definition --family TASK --cli-input-json file:// taskdef.json --region eu-central-1 --query 'taskDefinition.taskDefinitionArn' --output text)
       - LATEST_TASK_DEF=$(aws ecs list-task-definitions --family-prefix  TASK --sort DESC --query 'taskDefinitionArns[0]' --output text)
       - echo "Latest Task Definition = $LATEST_TASK_DEF"
-      - sed -i 's@LATEST_TASK_DEF @'"$LATEST_TASK_DEF"'@' $appspec.yaml
+      - sed -i 's@LATEST_TASK_DEF @'"$LATEST_TASK_DEF"'@' appspec.yaml
       - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json 
       
 artifacts:
