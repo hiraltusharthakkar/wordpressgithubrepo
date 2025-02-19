@@ -1,116 +1,24 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:054037131762:task-definition/Task:8",
+    "executionRoleArn": "arn:aws:iam::054037131762:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "New",
-            "image": "054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr",
-            "cpu": 0,
+            "image": "054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr:latest",
+            "essential": true,
             "portMappings": [
                 {
-                    "name": "new-80-tcp",
-                    "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
-                    "appProtocol": "http"
+                    "containerPort": 80
                 }
-            ],
-            "essential": true,
-            "environment": [
-                {
-                    "name": "WORDPRESS_DB_USER",
-                    "value": "admin"
-                },
-                {
-                    "name": "WORDPRESS_DB_HOST",
-                    "value": "/ecs-task/db_URL"
-                },
-                {
-                    "name": "WORDPRESS_DB_PASSWORD",
-                    "value": "/ecs-task/db_password"
-                },
-                {
-                    "name": "WORDPRESS_DB_NAME",
-                    "value": "wordpress"
-                }
-            ],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "linuxParameters": {
-                "initProcessEnabled": true
-            },
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "options": {
-                    "awslogs-group": "/ecs/Task",
-                    "mode": "non-blocking",
-                    "awslogs-create-group": "true",
-                    "max-buffer-size": "25m",
-                    "awslogs-region": "eu-central-1",
-                    "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
-            },
-            "systemControls": []
+            ]
         }
-    ],
-    "family": "Task",
-    "taskRoleArn": "arn:aws:iam::054037131762:role/ECSTaskRoleForRDSAccess",
-    "executionRoleArn": "arn:aws:iam::054037131762:role/ecsTaskExecutionRole",
-    "networkMode": "awsvpc",
-    "revision": 8,
-    "volumes": [],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-        },
-        {
-            "name": "ecs.capability.execution-role-awslogs"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.task-iam-role"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-        },
-        {
-            "name": "ecs.capability.task-eni"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-        }
-    ],
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE"
     ],
     "requiresCompatibilities": [
         "FARGATE"
     ],
+    "networkMode": "awsvpc",
     "cpu": "512",
     "memory": "3072",
-    "runtimePlatform": {
-        "cpuArchitecture": "X86_64",
-        "operatingSystemFamily": "LINUX"
-    },
-    "registeredAt": "2025-02-14T10:41:53.646Z",
-    "registeredBy": "arn:aws:sts::054037131762:assumed-role/AWSReservedSSO_AdministratorAccess_937c9066e2a402ce/hiral@integratech.ae",
-    "enableFaultInjection": false,
-    "tags": []
+    "family": "Task"
 }
