@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "New",
-            "image": "054037131762.dkr.ecr.eu-central-1.amazonaws.com/project/newregistryecr:latest",
+            "image": "CONTAINER_IMAGE",
             "cpu": 0,
             "portMappings": [
                 {
